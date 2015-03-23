@@ -1,0 +1,10 @@
+const GameConstants = {
+  LOAD_GAMES: 'LOAD_GAMES',
+  CREATE_NEW_GAME: 'CREATE_NEW_GAME',
+  ADD_NEW_GAME: 'ADD_NEW_GAME',
+  ADD_NEW_BLACK_CARD: 'ADD_NEW_BLACK_CARD',
+  JOIN_AS_HOST: 'JOIN_AS_HOST',
+  JOIN_AS_PLAYER: 'JOIN_AS_PLAYER'
+};
+
+module.exports = GameConstants;
