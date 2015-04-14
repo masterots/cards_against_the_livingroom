@@ -9,12 +9,12 @@ let GameCard = React.createClass({
 
   render() {
     var classname = this.props.black ? 'card black' : 'card white';
-    classname += this.props.current ? ' current' : '';
+    classname += this.props.current ? ' current' : ' used';
     let regexp_underscore = new RegExp('_', 'ig');
     let text = this.props.card.text.replace(regexp_underscore, '<span class="blank-space">&nbsp;</span>');
     let pickText = this.props.card.pick !== 1 ? 'cards' : 'card';
     return (
-      <div className={classname}>
+      <div className={classname} draggable="true">
         <ul>
           <li dangerouslySetInnerHTML={{__html: text}}></li>
           <li>Pick {this.props.card.pick} {pickText}</li>

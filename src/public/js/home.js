@@ -11,7 +11,7 @@ let GameStore = require('./stores/GameStore');
 let GameActions = require('./actions/GameActions');
 let GameLinkList = require('./components/GameLinkList.react');
 
-
+let cat = 'dog';
 
 function _getAppState() {
   return {

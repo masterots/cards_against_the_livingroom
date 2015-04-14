@@ -1,31 +1,32 @@
 let React = require('react');
-let GameStore = require('../stores/GameStore');
+let PlayerStore = require('../stores/PlayerStore');
+let GameCard = require('./GameCard.react');
 
-function _getGameInfo() {
+function _getState() {
   return {
-    gameInfo: GameStore.getGameInfo()
+    player: PlayerStore.getPlayer()
   };
 }
 
 let PlayerPage = React.createClass({
   getInitialState() {
-    return _getGameInfo();
+    return _getState();
   },
 
-  updateGameInfo() {
-    this.setState(_getGameInfo());
+  _onChange() {
+    this.setState(_getState());
   },
 
   componentDidMount() {
-    GameStore.addChangeListener(this.updateGameInfo);
+    PlayerStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    GameStore.removeChangeListener(this.updateGameInfo);
+    PlayerStore.removeChangeListener(this._onChange);
   },
 
   render() {
-    console.log(this.props.params);
+    console.log(this.state);
     return (
       <div>
         Player page

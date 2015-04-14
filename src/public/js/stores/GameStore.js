@@ -23,6 +23,13 @@ function _addBlackCardToGame(card, gameId) {
   }
 }
 
+function _addPlayerToGame(player, gameId) {
+  var game = _.chain(_games).where({'_id': gameId}).first().value();
+  if (game) {
+    game.players.push(player);
+  }
+}
+
 let GameStore = assign({}, EventEmitter.prototype, {
   getGames() {
     return _games;
@@ -30,6 +37,14 @@ let GameStore = assign({}, EventEmitter.prototype, {
 
   getGameInfo(gameId) {
     return _.chain(_games).where({'_id': gameId}).first().value();
+  },
+
+  getPlayers(gameId) {
+    var game = _.chain(_games).where({'_id': gameId}).first().value();
+    if (game) {
+      return game.players;
+    }
+    return [];
   },
 
   emitChange() {
@@ -59,6 +74,11 @@ AppDispatcher.register(action => {
 
     case GameConstants.ADD_NEW_BLACK_CARD:
       _addBlackCardToGame(action.card, action.gameId);
+      GameStore.emitChange();
+      break;
+
+    case GameConstants.CREATE_NEW_PLAYER:
+      _addPlayerToGame(action.player, action.gameId);
       GameStore.emitChange();
       break;
 
